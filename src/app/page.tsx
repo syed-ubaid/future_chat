@@ -49,6 +49,12 @@ export default function Home() {
     }, 1500);
   };
 
+  const handleClearChat = () => {
+    setMessages([]);
+    setInput('');
+    setIsTyping(false);
+  };
+
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
@@ -74,7 +80,15 @@ export default function Home() {
           <h1 className="text-xl font-bold bg-gradient-to-r from-sky-400 to-indigo-400 bg-clip-text text-transparent glow-text tracking-wide">
             FUTURE CHAT
           </h1>
-          <div className="w-8" /> {/* Spacer for balance */}
+          <button
+            onClick={handleClearChat}
+            className="px-3 py-1.5 text-xs font-medium text-red-300 bg-red-900/30 hover:bg-red-900/50 border border-red-800/50 rounded-lg transition-colors flex items-center gap-2 hover:shadow-[0_0_10px_rgba(239,68,68,0.2)] active:scale-95"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-3 h-3">
+              <path fillRule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 0 1 3.878.512.75.75 0 1 1-.49 1.478l-.56-.092v13.386a2.25 2.25 0 0 1-2.25 2.25H6.933a2.25 2.25 0 0 1-2.25-2.25V6.603a17.52 17.52 0 0 1-.56.093.75.75 0 0 1-.49-1.478 48.809 48.809 0 0 1 3.876-.512v-.227c0-1.144.757-2.148 1.89-2.28 2.05-.226 4.144-.226 6.195 0 1.133.132 1.89 1.136 1.89 2.28Zm-12 2.768h14.996V6.62a19.03 19.03 0 0 0-14.996 0v.626Zm1.5 1.5v12.257a.75.75 0 0 0 .75.75h9.733a.75.75 0 0 0 .75-.75V8.746a20.55 20.55 0 0 1-11.233 0Z" clipRule="evenodd" />
+            </svg>
+            Clear
+          </button>
         </header>
 
         {/* Chat Area */}
@@ -86,8 +100,8 @@ export default function Home() {
             >
               <div
                 className={`max-w-[70%] px-5 py-3 rounded-2xl shadow-lg leading-relaxed ${msg.role === 'user'
-                    ? 'bg-gradient-to-r from-sky-600 to-blue-600 text-white rounded-br-none'
-                    : 'bg-slate-800/80 text-slate-100 border border-slate-700/50 rounded-bl-none'
+                  ? 'bg-gradient-to-r from-sky-600 to-blue-600 text-white rounded-br-none'
+                  : 'bg-slate-800/80 text-slate-100 border border-slate-700/50 rounded-bl-none'
                   }`}
               >
                 {msg.text}
